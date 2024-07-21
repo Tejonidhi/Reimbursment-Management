@@ -1,0 +1,36 @@
+<h1>Employees</h1>
+<div class="table-container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Designation</th>
+        <th>Department</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @employees.each do |employee| %>
+        <tr>
+          <td><%= employee.first_name %></td>
+          <td><%= employee.last_name %></td>
+          <td><%= employee.email %></td>
+          <td><%= employee.designation %></td>
+          <td><%= employee.department.name if employee.department %></td>
+          <td>
+            <div class="inline-buttons">
+              <%= link_to 'Edit', edit_employee_path(employee), class: 'btn btn-warning' %>
+              <%= button_to 'Delete', employee, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+              <%= link_to 'View Bills', bills_employee_path(employee), class: 'btn btn-info' %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= link_to 'New Employee', new_employee_path, class: 'btn btn-success' %>
+<%= link_to 'View All Bills', bills_path, class: 'btn btn-info' %>
+<%= link_to 'New Bill', new_bill_path, class: 'btn btn-success' %>

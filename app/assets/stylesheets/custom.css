@@ -1,0 +1,9 @@
+.form-container {
+    width: 50%; /* Adjust the width as needed */
+    margin: 10 auto;
+  }
+.inline-buttons {
+    display: flex;
+    gap: 10px; /* Adjust gap as needed */
+}
+  

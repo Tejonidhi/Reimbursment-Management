@@ -1,0 +1,32 @@
+<%= form_with(model: @bill, local: true, class: 'needs-validation') do |form| %>
+  <% if @bill.errors.any? %>
+    <div class="alert alert-danger">
+      <h4 class="alert-heading">There were some errors:</h4>
+      <ul>
+        <% @bill.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :amount, class: 'form-label' %>
+    <%= form.number_field :amount, class: 'form-control', placeholder: 'Enter amount', required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :bill_type, class: 'form-label' %>
+    <%= form.select :bill_type, options_for_select(['Food', 'Travel', 'Medical', 'Office Supplies'], selected: @bill.bill_type), { prompt: 'Select Bill Type' }, { class: 'form-select', required: true } %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :submitted_employee_id, "Submitted By", class: 'form-label' %>
+    <%= form.collection_select :submitted_employee_id, @employees, :id, :full_name, { prompt: 'Select Employee' }, { class: 'form-select', required: true } %>
+  </div>
+
+  <div class="d-flex justify-content-left">
+    <%= form.submit @bill.new_record? ? 'Create Bill' : 'Update Bill', class: 'btn btn-primary' %>
+    <%= link_to 'Back to bills', bills_path, class: 'btn btn-secondary' %>
+  </div>
+<% end %>
